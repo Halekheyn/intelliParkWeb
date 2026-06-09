@@ -1,6 +1,7 @@
+// Va arrancar la aplicación
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { App } from './app/app';
+import { AppComponent } from './app/app.component'; // Trae el componente raíz
+import { appConfig } from './app/app.config'; // Trae la configuración global
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appConfig) // "Enciende" la aplicación
+  .catch((err) => console.error(err)); // Si falla, lo muestra en consola
