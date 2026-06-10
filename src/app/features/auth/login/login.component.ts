@@ -25,14 +25,14 @@ export class LoginComponent {
 
   // Definición del formulario reactivo con validaciones
   readonly loginForm = this.formBuilder.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]], // Campo obligatorio
-    password: ['', [Validators.required, Validators.minLength(6)]], // Campo obligatorio // Mínimo 6 caracteres
+    user_email: ['', [Validators.required, Validators.email]], // Campo obligatorio
+    user_password: ['', [Validators.required, Validators.minLength(6)]], // Campo obligatorio // Mínimo 6 caracteres
     remember: [false] // Checkbox "recuérdame" (por defecto desmarcado)
   });
 
   // computed() = valor calculado basado en otro signal/expresión
-  readonly emailControl = computed(() => this.loginForm.controls.email);
-  readonly passwordControl = computed(() => this.loginForm.controls.password);
+  readonly emailControl = computed(() => this.loginForm.controls.user_email);
+  readonly passwordControl = computed(() => this.loginForm.controls.user_password);
 
   // Alterna visibilidad de contraseña
   togglePasswordVisibility(): void {
@@ -48,15 +48,19 @@ export class LoginComponent {
       return; // Detiene la ejecución
     }
 
-    const { email, password } = this.loginForm.getRawValue(); // Extrae valores del formulario
-    const loggedIn = this._authService.login(email, password); // Intenta autenticar
+    const { user_email, user_password } = this.loginForm.getRawValue(); // Extrae valores del formulario
 
-    if (!loggedIn) {
-      this.loginError.set('Credenciales inválidas. Usa admin@demo.com / 123456'); // Muestra error
-      return;
-    }
-
-    this.router.navigate(['/dashboard']); // Login exitoso → navega al dashboard
+    this._authService.login(user_email, user_password).subscribe({
+      next: () => {
+        // Login exitoso → navega al dashboard
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        // Muestra error
+        const message = error.error?.message ?? 'No fue posible iniciar sesión. Verifica tus credenciales.';
+        this.loginError.set(message);
+      }
+    });
   }
 
   recovery(){
