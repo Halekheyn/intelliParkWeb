@@ -1,8 +1,8 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from '../../../enviroments/environment';
-import { AuthUser, LoginRequest, LoginResponse } from './auth.interface';
+import { AuthUser, LoginRequest, LoginResponse, UserMeResponse } from './auth.interface';
 /*
   •	@Injectable({ providedIn: 'root' }) → Patrón Singleton: un solo objeto compartido por toda la app
   •	signal() → Nueva forma reactiva de Angular. Reemplaza a las variables normales cuando necesitas que la UI reaccione a cambios
@@ -56,6 +56,26 @@ export class AuthService {
 
   }
 
+  getCurrentUser(): Observable<AuthUser | null> {
+
+    return this.httpClient.get<UserMeResponse>(`${this.apiBaseUrl}/auth/user-me`)
+               .pipe(
+                  map((response) => response.data ?? null),
+                  tap((userMe) => {
+                    if (userMe) {
+                      localStorage.setItem(this.userKey, JSON.stringify(userMe));
+                    }
+                  })
+                );
+  }
+
+  logout(): void {
+    // Borra la sesión del navegador
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.userKey);
+    this.isLoggedIn.set(false); // Actualiza el signal a "no logueado"
+  }
+
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
@@ -68,13 +88,6 @@ export class AuthService {
     }
 
     return JSON.parse(storedUser) as AuthUser;
-  }
-
-  logout(): void {
-    // Borra la sesión del navegador
-    localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.userKey);
-    this.isLoggedIn.set(false); // Actualiza el signal a "no logueado"
   }
 
   // Método privado: verifica si existe sesión guardada
