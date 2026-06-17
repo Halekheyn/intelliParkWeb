@@ -7,6 +7,7 @@ import { PasswordRecoveryComponent } from './features/password-recovery/password
 /* Dashboard  */
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { DashboardHomeComponent } from './features/dashboard/pages/home/dashboard-home.component';
+import { ParkingHomeComponent } from './features/parking/pages/parking-home/parking-home.component';
 
 /**
   URL "/"          → redirige a /login
@@ -43,6 +44,10 @@ export const routes: Routes = [
       {
         path: 'dashboard', // URL: "/dashboard"
         component: DashboardHomeComponent // Muestra el dashboard
+      },
+      {
+        path: 'parking',
+        component: ParkingHomeComponent
       },
     ]
   },

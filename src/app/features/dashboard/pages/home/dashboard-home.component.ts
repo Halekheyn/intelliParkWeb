@@ -7,7 +7,7 @@ import { AuthUser } from '../../../../core/auth/auth.interface';
 @Component({
   selector: 'app-dashboard-home',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './dashboard-home.component.html',
   styleUrl: './dashboard-home.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
