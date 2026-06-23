@@ -9,6 +9,7 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { DashboardHomeComponent } from './features/dashboard/pages/home/dashboard-home.component';
 import { ParkingHomeComponent } from './features/parking/pages/parking-home/parking-home.component';
 import { VehiclesHomeComponent } from './features/vehicles/pages/vehicles-home/vehicles-home.component';
+import { PaymentsHomeComponent } from './features/payments/pages/payments-home/payments-home.component';
 
 /**
   URL "/"          → redirige a /login
@@ -53,6 +54,10 @@ export const routes: Routes = [
       {
         path: 'vehicles',
         component: VehiclesHomeComponent
+      },
+      {
+        path: 'payments',
+        component: PaymentsHomeComponent
       },
     ]
   },
