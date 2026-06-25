@@ -10,6 +10,7 @@ import { DashboardHomeComponent } from './features/dashboard/pages/home/dashboar
 import { ParkingHomeComponent } from './features/parking/pages/parking-home/parking-home.component';
 import { VehiclesHomeComponent } from './features/vehicles/pages/vehicles-home/vehicles-home.component';
 import { PaymentsHomeComponent } from './features/payments/pages/payments-home/payments-home.component';
+import { UsersHomeComponent } from './features/user/pages/users-home/users-home.component';
 
 /**
   URL "/"          → redirige a /login
@@ -58,6 +59,10 @@ export const routes: Routes = [
       {
         path: 'payments',
         component: PaymentsHomeComponent
+      },
+      {
+        path: 'users',
+        component: UsersHomeComponent
       },
     ]
   },
