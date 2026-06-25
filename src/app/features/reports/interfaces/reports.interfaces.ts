@@ -22,7 +22,7 @@ export interface IncomeByVehicleType {
 
 export interface PaymentDetail {
   payment_id: number;
-  parking_id: number;
+  payment_parking_id: number;
   payment_method: string;
   payment_amount: number | string;
   payment_reference?: string | null;
