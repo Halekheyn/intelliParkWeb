@@ -11,6 +11,7 @@ import { ParkingHomeComponent } from './features/parking/pages/parking-home/park
 import { VehiclesHomeComponent } from './features/vehicles/pages/vehicles-home/vehicles-home.component';
 import { PaymentsHomeComponent } from './features/payments/pages/payments-home/payments-home.component';
 import { UsersHomeComponent } from './features/user/pages/users-home/users-home.component';
+import { ReportsHomeComponent } from './features/reports/pages/reports-home/reports-home.component';
 
 /**
   URL "/"          → redirige a /login
@@ -63,6 +64,10 @@ export const routes: Routes = [
       {
         path: 'users',
         component: UsersHomeComponent
+      },
+      {
+        path: 'reports',
+        component: ReportsHomeComponent
       },
     ]
   },
